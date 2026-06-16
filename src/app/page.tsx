@@ -91,7 +91,7 @@ export default function HomePage() {
               </a>
             </p>
             <p className="text-[10px] text-slate-700">
-              For educational purposes only. We do not host any video content.
+              For prosonal use purposes only. We do not host any video content.
             </p>
           </div>
         </footer>
