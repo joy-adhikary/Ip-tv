@@ -1,0 +1,251 @@
+@import "tailwindcss";
+
+/* ============================================================
+   DESIGN TOKENS — Dark Glassmorphic Theme
+   ============================================================ */
+:root {
+  --bg-primary: #060b18;
+  --bg-secondary: #0a1020;
+  --bg-card: rgba(15, 23, 42, 0.5);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-blur: blur(16px);
+  --accent-primary: #6366f1;
+  --accent-secondary: #8b5cf6;
+  --accent-cyan: #22d3ee;
+  --accent-rose: #f43f5e;
+  --text-primary: #f1f5f9;
+  --text-muted: #64748b;
+  --glow-purple: rgba(99, 102, 241, 0.35);
+  --glow-cyan: rgba(34, 211, 238, 0.25);
+}
+
+/* ============================================================
+   BASE STYLES
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: radial-gradient(ellipse 120% 80% at 20% 10%, #0f1e40 0%, #060b18 45%, #060c1a 100%);
+  color: var(--text-primary);
+  font-family: 'Inter', 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================
+   CUSTOM SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.4);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.4);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.7);
+}
+
+/* ============================================================
+   GLASSMORPHISM UTILITIES
+   ============================================================ */
+.glass {
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-strong {
+  background: rgba(10, 16, 32, 0.7);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-card {
+  background: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.06) 0%,
+    rgba(15, 23, 42, 0.5) 50%,
+    rgba(139, 92, 246, 0.06) 100%
+  );
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.12) 0%,
+    rgba(15, 23, 42, 0.6) 50%,
+    rgba(139, 92, 246, 0.12) 100%
+  );
+  border-color: rgba(99, 102, 241, 0.3);
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.15), 0 8px 32px rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* ============================================================
+   ANIMATIONS & KEYFRAMES
+   ============================================================ */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 8px rgba(244, 63, 94, 0.6); }
+  50%       { box-shadow: 0 0 20px rgba(244, 63, 94, 0.9), 0 0 40px rgba(244, 63, 94, 0.3); }
+}
+
+@keyframes fade-slide-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
+}
+
+@keyframes live-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+@keyframes gradient-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ============================================================
+   ANIMATION CLASSES
+   ============================================================ */
+.animate-fade-slide-in { animation: fade-slide-in 0.5s ease-out both; }
+.animate-pulse-glow    { animation: pulse-glow 2s ease-in-out infinite; }
+.animate-float         { animation: float 4s ease-in-out infinite; }
+.animate-live-blink    { animation: live-blink 1.5s ease-in-out infinite; }
+
+/* ============================================================
+   SHIMMER SKELETON
+   ============================================================ */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(30, 41, 59, 0.6) 25%,
+    rgba(51, 65, 85, 0.4) 50%,
+    rgba(30, 41, 59, 0.6) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite;
+}
+
+/* ============================================================
+   GRADIENT TEXT
+   ============================================================ */
+.gradient-text {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #22d3ee 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 4s ease infinite;
+}
+
+/* ============================================================
+   LIVE BADGE
+   ============================================================ */
+.live-badge {
+  background: linear-gradient(135deg, #f43f5e, #e11d48);
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* ============================================================
+   SIDEBAR NAV ITEM
+   ============================================================ */
+.nav-item-active {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.15));
+  border-left: 3px solid #6366f1;
+  color: #a5b4fc;
+}
+
+/* ============================================================
+   VIDEO PLAYER OVERLAY
+   ============================================================ */
+.player-gradient-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(6, 11, 24, 0.95) 0%,
+    rgba(6, 11, 24, 0.3) 40%,
+    transparent 100%
+  );
+}
+
+/* ============================================================
+   CARD HOVER GLOW
+   ============================================================ */
+.card-glow-purple:hover {
+  box-shadow:
+    0 0 0 1px rgba(99, 102, 241, 0.4),
+    0 4px 24px rgba(99, 102, 241, 0.2),
+    0 16px 48px rgba(0, 0, 0, 0.5);
+}
+
+/* ============================================================
+   STAGGER ANIMATION DELAYS
+   ============================================================ */
+.stagger-1  { animation-delay: 0.05s; }
+.stagger-2  { animation-delay: 0.10s; }
+.stagger-3  { animation-delay: 0.15s; }
+.stagger-4  { animation-delay: 0.20s; }
+.stagger-5  { animation-delay: 0.25s; }
+.stagger-6  { animation-delay: 0.30s; }
+.stagger-7  { animation-delay: 0.35s; }
+.stagger-8  { animation-delay: 0.40s; }
+.stagger-9  { animation-delay: 0.45s; }
+.stagger-10 { animation-delay: 0.50s; }
+
+/* ============================================================
+   ACCENT GLOW BUTTONS
+   ============================================================ */
+.btn-primary {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+  transition: all 0.25s ease;
+}
+.btn-primary:hover {
+  box-shadow: 0 6px 28px rgba(99, 102, 241, 0.6);
+  transform: translateY(-1px);
+}
+
+.btn-watch {
+  background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
+  box-shadow: 0 4px 20px rgba(244, 63, 94, 0.4);
+  transition: all 0.25s ease;
+}
+.btn-watch:hover {
+  box-shadow: 0 6px 28px rgba(244, 63, 94, 0.65);
+  transform: translateY(-1px);
+}
